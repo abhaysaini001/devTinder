@@ -2,26 +2,21 @@ const express = require("express");
 
 const app = express();
 
+const {adminAuth, userAuth} = require("./middleware/auth")
+app.use("/admin",adminAuth)
 
-//this will only handle get call to /user
-app.get("/user", (req,res)=>{
-     res.send({firstName:"Abhay",lastName:"Saini"});
+app.get("/user",userAuth,(req,res)=>{
+     res.send("User data sent")
+});
+app.get("/admin/getAllData",(req,res)=>{
+     res.send("all data sent")
 });
 
-app.post("/user", async(req,res)=>{
-     console.log(req,body);
-     //Saving data to DB
-     res.send("Data Successfully saved in database!");
-});
+app.get("/admin/deleteUser",(req,res)=>{
+     res.send("User Deleted") 
+})
 
-app.delete("/user",(req,res)=>{
-     res.send("Deleted Successfully");
-});
 
-//this will match all the HTTP methods api call to /test
-app.use("/test",(req,res)=>{
-res.send("Hello from the server");
-});
 
 app.listen(3000, ()=>{
      console.log("server is succesfully load");
