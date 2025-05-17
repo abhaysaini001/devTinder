@@ -1,24 +1,35 @@
-const express = require("express");
-
+const express = require ("express");
+const connectDB = require("./config/database")
 const app = express();
+const User = require("./models/user")
 
-app.get("/getUserData", (req,res)=>{
-     try {
-            throw new Error("dvbzhjf")
-     res.send("User Data Sent")
-     } catch (error) {
-          res.status(500).send("Some Eroor Occured Contact Support Team")
+app.use(express.json());
+
+
+app.post("/signup",async (req,res)=>{
+  
+
+    //  creating a new instance of the User Model
+     const user = new User(req.body);
+          
+
+     try{
+       await user.save();
+       res.send("User Added Successfully")
      }
-     //Logic of DB Call and get User Data
-   
-})
-
-app.use("/",(err,req,res,next)=>{
-if(err){
-     res.status(500).send("something went wrong");
-}
+     catch(err){
+       res.status(400).send("Error saving the user:"+ err.message);
+     }
 });
 
-app.listen(3000, ()=>{
-     console.log("server is succesfully load");
+connectDB()
+  .then(() => {
+    console.log("Database Connection established..");
+    app.listen(3000, ()=>{
+     console.log("server is succesfully load....");
 });
+  })
+  .catch((err) => {
+    console.error("Database Cannot be connected!!",err.message);
+  });
+
