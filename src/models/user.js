@@ -2,23 +2,48 @@ const mongoose = require("mongoose");
 
 const userSchema =  new mongoose.Schema({
     firstName :{
-        type:String
+        type:String,
+        required:true,
+        minLength:4,
+        maxLength:50,
     },
     lastName:{
         type:String
     },
     emailId:{
-        type:String
+        type:String,
+        required:true,
+        unique:true,
+        lowercase:true,
     },
     password:{
-        type:String
+        type:String,
+        required:true,
     },
     age:{
-        type:Number
+        type:Number,
+        min:18,
     },
     gender:{
-        type:String
+        type:String,
+        validate(value){
+            if(!["male","female","others"].includes(value))
+                throw new Error("Gender data is Not Valid")
+        }
+    },
+    photoUrl:{
+        type:String,
+        default:"https://www.pnrao.com/wp-content/uploads/2023/06/dummy-user-male.jpg"
+    },
+    about :{
+        type:String,
+        default:"This is default value of user!"
+    },
+    skills:{
+        type:[String]
     }
+},{
+    timestamps:true,
 });
 
 
