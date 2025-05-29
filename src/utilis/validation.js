@@ -28,7 +28,18 @@ const validateEditProfileData = (req) => {
   return isEditAllowed;
 };
 
+const canChangePassword = (lastChanged)=>{
+if(!lastChanged) return true;
+
+  const now = new Date();
+  const sevenDaysAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+  return lastChanged < sevenDaysAgo;
+}
+
+
+
 module.exports = {
   validateSignUpData,
   validateEditProfileData,
+  canChangePassword
 };
