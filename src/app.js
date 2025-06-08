@@ -6,7 +6,7 @@ const cors = require("cors");
 
 // Allow both localhost (dev) and your deployed frontend URL (change this URL after deploying frontend)
 app.use(cors({
-  origin: "https://dev-tinder-h533z1e2x-abhay-sainis-projects.vercel.app", // frontend domain
+  origin: "https://dev-tinder-web-liart.vercel.app/", // frontend domain
   credentials: true
 }));
 
