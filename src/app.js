@@ -9,11 +9,12 @@ app.use(
   cors({
     origin: [
       "http://localhost:5173",
-      "https://your-frontend-url.vercel.app"  // <-- Replace this with your actual frontend URL after deploy
+      "https://dev-tinder-oubdcd68s-abhay-sainis-projects.vercel.app"
     ],
     credentials: true,
   })
 );
+
 
 app.use(express.json());
 app.use(cookieParser());
