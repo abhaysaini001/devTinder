@@ -4,11 +4,17 @@ const app = express();
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
+// Allow both localhost (dev) and your deployed frontend URL (change this URL after deploying frontend)
 app.use(
   cors({
-  origin: "http://localhost:5173",
-  credentials:true,
-}));
+    origin: [
+      "http://localhost:5173",
+      "https://your-frontend-url.vercel.app"  // <-- Replace this with your actual frontend URL after deploy
+    ],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
 app.use(cookieParser());
 
@@ -17,17 +23,18 @@ const profileRouter = require("./routes/profile");
 const requestRouter = require("./routes/request");
 const userRouter = require("./routes/user");
 
-app.use("/", authRouter)
-app.use("/", profileRouter)
-app.use("/", requestRouter)
-app.use("/", userRouter)
- 
+app.use("/", authRouter);
+app.use("/", profileRouter);
+app.use("/", requestRouter);
+app.use("/", userRouter);
+
+const PORT = process.env.PORT || 3000;
 
 connectDB()
   .then(() => {
     console.log("Database Connection established..");
-    app.listen(3000, () => {
-      console.log("server is succesfully load....");
+    app.listen(PORT, () => {
+      console.log(`Server is successfully running on port ${PORT}`);
     });
   })
   .catch((err) => {
