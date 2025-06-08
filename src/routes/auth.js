@@ -17,7 +17,7 @@ authRouter.post("/login", async (req, res) => {
     if (isPasswordValid) {
       const token = await user.getJWT();
 
-      // ✅ FIX: Set cookie with proper security settings
+      
       res.cookie("token", token, {
         httpOnly: true,
         secure: true,
