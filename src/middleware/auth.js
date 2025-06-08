@@ -5,6 +5,7 @@ const userAuth = async (req, res, next) => {
   try {
     let token;
 
+    // Check both cookie and header
     if (req.cookies?.token) {
       token = req.cookies.token;
     } else if (
@@ -30,4 +31,9 @@ const userAuth = async (req, res, next) => {
   } catch (err) {
     res.status(401).send("ERROR: " + err.message);
   }
+};
+
+
+module.exports = {
+  userAuth,
 };
