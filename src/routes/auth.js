@@ -1,3 +1,9 @@
+const express = require("express");
+const { validateSignUpData } = require("../utilis/validation");
+const bcrypt = require("bcrypt");
+const User = require("../models/user");
+const authRouter = express.Router();
+
 authRouter.post("/login", async (req, res) => {
   try {
     const { emailId, password } = req.body;
