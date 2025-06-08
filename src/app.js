@@ -5,15 +5,11 @@ const cookieParser = require("cookie-parser");
 const cors = require("cors");
 
 // Allow both localhost (dev) and your deployed frontend URL (change this URL after deploying frontend)
-app.use(
-  cors({
-    origin: [
-      "http://localhost:5173",
-      "https://dev-tinder-oubdcd68s-abhay-sainis-projects.vercel.app"
-    ],
-    credentials: true,
-  })
-);
+app.use(cors({
+  origin: "https://dev-tinder-h533z1e2x-abhay-sainis-projects.vercel.app", // frontend domain
+  credentials: true
+}));
+
 
 
 app.use(express.json());
